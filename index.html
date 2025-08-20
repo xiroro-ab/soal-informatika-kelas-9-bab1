@@ -7,58 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Grand+Hotel&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
-        /* Semua CSS dari sebelumnya tetap sama, dengan sedikit tambahan */
-        :root {
-            --primary-font: 'Roboto', sans-serif; --logo-font: 'Grand Hotel', cursive; --background-color: #FAFAFA;
-            --nav-border-color: #DBDBDB; --primary-text-color: #262626; --secondary-text-color: #8e8e8e;
-            --button-color: #0095F6; --white-color: #FFFFFF;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: var(--primary-font); background-color: #EFEFEF; color: var(--primary-text-color); display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .app-container { width: 100%; max-width: 420px; height: 88vh; max-height: 850px; background: var(--background-color); border-radius: 24px; box-shadow: 0 12px 50px -12px rgba(0, 0, 0, 0.3); display: flex; flex-direction: column; overflow: hidden; border: 6px solid #111; }
-        .app-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--white-color); border-bottom: 1px solid var(--nav-border-color); flex-shrink: 0; }
-        .app-header .logo-title { font-family: var(--logo-font); font-size: 28px; font-weight: 500; }
-        .app-header .header-icons i { font-size: 26px; margin-left: 20px; }
-        .app-content { flex-grow: 1; overflow-y: auto; padding: 16px 0; }
-        .page { display: none; padding: 0 16px; }
-        .page.active { display: block; animation: fadeIn 0.4s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .nav-bar { display: flex; justify-content: space-around; background: var(--white-color); border-top: 1px solid var(--nav-border-color); padding: 8px 0; flex-shrink: 0; }
-        .nav-button { background: none; border: none; cursor: pointer; }
-        .nav-button i { font-size: 28px; color: var(--primary-text-color); }
-        .nav-button.active i { font-weight: 900; }
-        .login-container { padding: 30px; text-align: center; display: flex; flex-direction: column; justify-content: center; height: 100%; }
-        .login-container img { width: 80px; margin: 0 auto 20px auto; }
-        .login-container p { margin-bottom: 20px; color: var(--secondary-text-color); }
-        .login-input { width: 100%; padding: 14px; margin-bottom: 12px; font-size: 14px; background: #EFEFEF; border: 1px solid var(--nav-border-color); border-radius: 8px; }
-        .login-button { width: 100%; padding: 14px; margin-top: 10px; font-size: 16px; font-weight: 600; background: var(--button-color); color: var(--white-color); border: none; border-radius: 8px; cursor: pointer; }
-        .quiz-post { background: var(--white-color); border: 1px solid var(--nav-border-color); border-radius: 12px; margin-bottom: 20px; }
-        .post-header { display: flex; align-items: center; padding: 12px 16px; }
-        .post-header img { width: 32px; height: 32px; border-radius: 50%; margin-right: 12px; }
-        .post-header .username { font-weight: 600; }
-        .question-text { padding: 16px; font-size: 16px; line-height: 1.5; }
-        .options-container { padding: 0 16px 16px 16px; }
-        .option { display: block; width: 100%; padding: 14px; margin-bottom: 8px; font-size: 15px; text-align: center; border: 1px solid var(--nav-border-color); border-radius: 8px; background: none; cursor: pointer; transition: all 0.2s ease; }
-        .option:hover:not(:disabled) { background: #EFEFEF; }
-        .option.correct { background: #C8E6C9; border-color: #4CAF50; font-weight: 600; }
-        .option.incorrect { background: #FFCDD2; border-color: #F44336; font-weight: 600; }
-        .post-actions { display: flex; align-items: center; padding: 8px 16px; }
-        .post-actions i { font-size: 26px; margin-right: 16px; }
-        .progress-text { padding: 0 16px 16px 16px; font-size: 12px; color: var(--secondary-text-color); }
-        #next-btn { display: block; width: calc(100% - 32px); margin: 0 auto 16px auto; padding: 12px; font-size: 16px; font-weight: 600; background: var(--button-color); color: var(--white-color); border: none; border-radius: 8px; cursor: pointer; display: none; }
-        .static-page { padding: 20px; background: var(--white-color); border-radius: 12px; border: 1px solid var(--nav-border-color); }
-        .static-page h2 { font-size: 18px; margin-bottom: 12px; }
-        .static-page p { color: var(--secondary-text-color); line-height: 1.6; }
-
-        /* --- STYLE BARU UNTUK HALAMAN HASIL --- */
-        .results-list { list-style: none; padding: 0; }
-        .result-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #efefef; }
-        .result-item:last-child { border-bottom: none; }
-        .result-rank { font-size: 18px; font-weight: 700; color: var(--secondary-text-color); width: 40px; text-align: center; }
-        .result-info { flex-grow: 1; }
-        .result-info .name { font-weight: 600; }
-        .result-info .class { font-size: 12px; color: var(--secondary-text-color); }
-        .result-score { font-size: 20px; font-weight: 700; color: var(--button-color); }
+        /* CSS tidak ada perubahan, tetap sama seperti sebelumnya */
+        :root { --primary-font: 'Roboto', sans-serif; --logo-font: 'Grand Hotel', cursive; --background-color: #FAFAFA; --nav-border-color: #DBDBDB; --primary-text-color: #262626; --secondary-text-color: #8e8e8e; --button-color: #0095F6; --white-color: #FFFFFF; } * { box-sizing: border-box; margin: 0; padding: 0; } body { font-family: var(--primary-font); background-color: #EFEFEF; color: var(--primary-text-color); display: flex; justify-content: center; align-items: center; min-height: 100vh; } .app-container { width: 100%; max-width: 420px; height: 88vh; max-height: 850px; background: var(--background-color); border-radius: 24px; box-shadow: 0 12px 50px -12px rgba(0, 0, 0, 0.3); display: flex; flex-direction: column; overflow: hidden; border: 6px solid #111; } .app-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--white-color); border-bottom: 1px solid var(--nav-border-color); flex-shrink: 0; } .app-header .logo-title { font-family: var(--logo-font); font-size: 28px; font-weight: 500; } .app-header .header-icons i { font-size: 26px; margin-left: 20px; } .app-content { flex-grow: 1; overflow-y: auto; padding: 16px 0; } .page { display: none; padding: 0 16px; } .page.active { display: block; animation: fadeIn 0.4s; } @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } } .nav-bar { display: flex; justify-content: space-around; background: var(--white-color); border-top: 1px solid var(--nav-border-color); padding: 8px 0; flex-shrink: 0; } .nav-button { background: none; border: none; cursor: pointer; } .nav-button i { font-size: 28px; color: var(--primary-text-color); } .nav-button.active i { font-weight: 900; } .login-container { padding: 30px; text-align: center; display: flex; flex-direction: column; justify-content: center; height: 100%; } .login-container img { width: 80px; margin: 0 auto 20px auto; } .login-container p { margin-bottom: 20px; color: var(--secondary-text-color); } .login-input { width: 100%; padding: 14px; margin-bottom: 12px; font-size: 14px; background: #EFEFEF; border: 1px solid var(--nav-border-color); border-radius: 8px; } .login-button { width: 100%; padding: 14px; margin-top: 10px; font-size: 16px; font-weight: 600; background: var(--button-color); color: var(--white-color); border: none; border-radius: 8px; cursor: pointer; } .quiz-post { background: var(--white-color); border: 1px solid var(--nav-border-color); border-radius: 12px; margin-bottom: 20px; } .post-header { display: flex; align-items: center; padding: 12px 16px; } .post-header img { width: 32px; height: 32px; border-radius: 50%; margin-right: 12px; } .post-header .username { font-weight: 600; } .question-text { padding: 16px; font-size: 16px; line-height: 1.5; } .options-container { padding: 0 16px 16px 16px; } .option { display: block; width: 100%; padding: 14px; margin-bottom: 8px; font-size: 15px; text-align: center; border: 1px solid var(--nav-border-color); border-radius: 8px; background: none; cursor: pointer; transition: all 0.2s ease; } .option:hover:not(:disabled) { background: #EFEFEF; } .option.correct { background: #C8E6C9; border-color: #4CAF50; font-weight: 600; } .option.incorrect { background: #FFCDD2; border-color: #F44336; font-weight: 600; } .post-actions { display: flex; align-items: center; padding: 8px 16px; } .post-actions i { font-size: 26px; margin-right: 16px; } .progress-text { padding: 0 16px 16px 16px; font-size: 12px; color: var(--secondary-text-color); } #next-btn { display: block; width: calc(100% - 32px); margin: 0 auto 16px auto; padding: 12px; font-size: 16px; font-weight: 600; background: var(--button-color); color: var(--white-color); border: none; border-radius: 8px; cursor: pointer; display: none; } .static-page { padding: 20px; background: var(--white-color); border-radius: 12px; border: 1px solid var(--nav-border-color); } .static-page h2 { font-size: 18px; margin-bottom: 12px; } .static-page p { color: var(--secondary-text-color); line-height: 1.6; } .results-list { list-style: none; padding: 0; } .result-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #efefef; } .result-item:last-child { border-bottom: none; } .result-rank { font-size: 18px; font-weight: 700; color: var(--secondary-text-color); width: 40px; text-align: center; } .result-info { flex-grow: 1; } .result-info .name { font-weight: 600; } .result-info .class { font-size: 12px; color: var(--secondary-text-color); } .result-score { font-size: 20px; font-weight: 700; color: var(--button-color); }
     </style>
 </head>
 <body>
@@ -97,9 +47,7 @@
             <div class="page" id="page-profile">
                 <div class="static-page">
                     <h2>Papan Peringkat</h2>
-                    <div id="results-container">
-                        <p>Memuat data hasil ujian...</p>
-                    </div>
+                    <div id="results-container"><p>Memuat data hasil ujian...</p></div>
                 </div>
             </div>
         </main>
@@ -112,82 +60,141 @@
     </div>
 
     <script>
-        // --- SCRIPT URL DARI GOOGLE APPS SCRIPT ---
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxaN65kKqEk1kXTcDmPUsJkzX8UXUTiwD2lkcTpfLdye7qUtgB5HvzGjIwswLnohJFC/exec; // 👈 WAJIB GANTI DENGAN URL BARU!
+        // ================================================================
+        // KODE FINAL JAVASCRIPT - Versi Stabil
+        // ================================================================
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbx5938aKsVZ_ORsxxSOEIpIwvE6sXWj58601jLPivJnIGRol4UFzDyrdonAspS1FD1ElQ/exec';
 
-        // --- NAVIGASI & LOGIKA KUIS (Dengan Penambahan Logika Hasil) ---
+        const quizData = [ 
+            { question: "Dalam struktur data, kumpulan titik-titik (nodes) yang dihubungkan oleh garis-garis (edges) disebut sebagai...", options: ["Tree", "Graf", "Array", "List"], answer: "Graf"}, 
+            { question: "Struktur data yang menggambarkan hubungan hierarkis, seperti silsilah keluarga, adalah contoh dari...", options: ["Graf", "Linked List", "Tree", "Stack"], answer: "Tree"}, 
+            { question: "Dalam struktur data Tree, node yang tidak memiliki 'anak' disebut...", options: ["Root (Akar)", "Parent (Induk)", "Branch (Cabang)", "Leaf (Daun)"], answer: "Leaf (Daun)"}, 
+            { question: "Syarat: \"Membawa kartu pelajar DAN memakai seragam.\" Jika Budi hanya memakai seragam, apa hasilnya?", options: ["Boleh masuk", "Tidak boleh masuk", "Boleh masuk jika diizinkan", "Informasi tidak cukup"], answer: "Tidak boleh masuk"}, 
+            { question: "Peta jaringan kereta api paling tepat direpresentasikan dengan struktur data...", options: ["Graf", "Tree", "Array", "Queue"], answer: "Graf"}, 
+            { question: "Ciri khas utama dari struktur data Tree adalah...", options: ["Memiliki banyak siklus", "Setiap node bisa punya banyak 'induk'", "Punya simpul awal", "Tidak memiliki siklus (jalur melingkar)"], answer: "Tidak memiliki siklus (jalur melingkar)"}, 
+            { question: "Ekspresi: \"(Hari Minggu) AND (Libur sekolah)\". Agar bernilai BENAR, maka...", options: ["Cukup hari Minggu.", "Harus hari Minggu DAN libur sekolah.", "Cukup libur sekolah.", "Salah satu saja cukup."], answer: "Harus hari Minggu DAN libur sekolah."}, 
+            { question: "Pertemanan di media sosial paling sesuai direpresentasikan sebagai...", options: ["Tree", "Graf", "Stack", "Array"], answer: "Graf"}, 
+            { question: "Sistem login memeriksa: \"(Username benar) AND (Password benar)\". Jika username salah tapi password benar, apa yang terjadi?", options: ["Login berhasil", "Login gagal", "Minta username lagi", "Sistem terkunci"], answer: "Login gagal"}, 
+            { question: "Node paling atas dalam sebuah struktur data Tree disebut...", options: ["Leaf (Daun)", "Child (Anak)", "Root (Akar)", "Edge (Sisi)"], answer: "Root (Akar)"} 
+        ];
+
+        let studentName = "", studentClass = "";
+        let currentQuestionIndex = 0, score = 0;
+        let resultsLoaded = false;
+
         const navButtons = document.querySelectorAll('.nav-button');
         const pages = document.querySelectorAll('.page');
-        let resultsLoaded = false; // Penanda agar data tidak dimuat berulang kali
+        const startBtn = document.getElementById('start-btn');
+        const loginContainer = document.getElementById('login-container');
+        const quizArea = document.getElementById('quiz-area');
 
+        // Fungsi Navigasi
         navButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const targetPageId = button.dataset.page;
-                
                 pages.forEach(page => page.classList.remove('active'));
                 document.getElementById(targetPageId).classList.add('active');
-                
                 navButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-
-                // FUNGSI BARU: Jika tab "Hasil" diklik, muat datanya
                 if (targetPageId === 'page-profile' && !resultsLoaded) {
                     loadResults();
                 }
             });
         });
-        
-        // FUNGSI BARU untuk memuat dan menampilkan hasil
+
+        startBtn.addEventListener('click', () => {
+            studentName = document.getElementById('student-name').value.trim();
+            studentClass = document.getElementById('student-class').value;
+            if (studentName === "" || studentClass === "") {
+                alert("Harap isi nama dan pilih kelas!");
+                return;
+            }
+            loginContainer.style.display = 'none';
+            quizArea.style.display = 'block';
+            startQuiz();
+        });
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            let currentQuestion = quizData[currentQuestionIndex];
+            quizArea.innerHTML = `
+            <div class="quiz-post">
+                <div class="post-header"><img src="https://i.pravatar.cc/150?u=guru" alt="avatar"><span class="username">Guru Informatika</span></div>
+                <div class="question-text">${currentQuestion.question}</div>
+                <div class="options-container">${currentQuestion.options.map(option => `<button class="option">${option}</button>`).join('')}</div>
+                <div class="post-actions"><i class='bx bx-heart'></i><i class='bx bx-comment'></i><i class='bx bx-paper-plane'></i></div>
+                <div class="progress-text">Pertanyaan ${currentQuestionIndex + 1} dari ${quizData.length}</div>
+            </div>
+            <button id="next-btn">Selanjutnya</button>`;
+            
+            document.querySelectorAll('.option').forEach(button => {
+                button.addEventListener('click', selectAnswer);
+            });
+        }
+
+        function selectAnswer(e) {
+            const selectedBtn = e.target;
+            const isCorrect = selectedBtn.innerText === quizData[currentQuestionIndex].answer;
+            if (isCorrect) {
+                selectedBtn.classList.add('correct');
+                score++;
+            } else {
+                selectedBtn.classList.add('incorrect');
+            }
+            document.querySelectorAll('.option').forEach(button => button.disabled = true);
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.style.display = 'block';
+            nextBtn.addEventListener('click', handleNextButton, { once: true });
+        }
+
+        function handleNextButton() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                showQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        async function showScore() {
+            const accuracy = Math.round((score / quizData.length) * 100);
+            quizArea.innerHTML = `<div class="static-page"><h2>Ujian Selesai, ${studentName}!</h2><p>Skor akhir kamu adalah:</p><h1 style="font-size: 4em; margin: 20px 0;">${score * 10}</h1><p>(${score} dari ${quizData.length} benar, Akurasi: ${accuracy}%)</p><p id="save-status" style="margin-top: 20px; color: #8e8e8e;">Menyimpan hasil...</p><button class="login-button" onclick="window.location.reload()">Selesai</button></div>`;
+            const dataToSend = { nama: studentName, skor: score, kelas: studentClass };
+            try {
+                await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(dataToSend).toString() }); // Mengirim sebagai form-data
+                document.getElementById('save-status').innerText = 'Hasil berhasil disimpan! ✅';
+            } catch (error) {
+                document.getElementById('save-status').innerText = 'Gagal menyimpan hasil. ❌';
+            }
+        }
+
         async function loadResults() {
             const resultsContainer = document.getElementById('results-container');
             resultsContainer.innerHTML = '<p>Memuat data hasil ujian...</p>';
-            
             try {
                 const response = await fetch(scriptURL);
                 const data = await response.json();
-                resultsLoaded = true; // Tandai bahwa data sudah dimuat
-
+                resultsLoaded = true;
                 if (data.length === 0) {
-                    resultsContainer.innerHTML = '<p>Belum ada data hasil ujian yang tersimpan.</p>';
+                    resultsContainer.innerHTML = '<p>Belum ada data hasil ujian.</p>';
                     return;
                 }
-
-                // Urutkan data dari skor tertinggi ke terendah
                 data.sort((a, b) => b.skor - a.skor);
-
-                // Buat daftar hasil
                 let resultsHTML = '<ul class="results-list">';
                 data.forEach((result, index) => {
-                    resultsHTML += `
-                    <li class="result-item">
-                        <div class="result-rank">${index + 1}</div>
-                        <div class="result-info">
-                            <div class="name">${result.nama}</div>
-                            <div class="class">${result.kelas}</div>
-                        </div>
-                        <div class="result-score">${result.skor * 10}</div>
-                    </li>
-                    `;
+                    resultsHTML += `<li class="result-item"><div class="result-rank">${index + 1}</div><div class="result-info"><div class="name">${result.nama}</div><div class="class">${result.kelas}</div></div><div class="result-score">${result.skor * 10}</div></li>`;
                 });
                 resultsHTML += '</ul>';
                 resultsContainer.innerHTML = resultsHTML;
-
             } catch (error) {
                 resultsContainer.innerHTML = '<p>Gagal memuat data. Periksa kembali koneksi atau pengaturan script Anda.</p>';
-                console.error('Error fetching results:', error);
             }
         }
-        
-        // --- SISA KODE KUIS DARI SEBELUMNYA TIDAK BERUBAH ---
-        const quizData = [ { question: "Dalam struktur data, kumpulan titik-titik (nodes) yang dihubungkan oleh garis-garis (edges) disebut sebagai...", options: ["Tree", "Graf", "Array", "List"], answer: "Graf"}, { question: "Struktur data yang menggambarkan hubungan hierarkis, seperti silsilah keluarga, adalah contoh dari...", options: ["Graf", "Linked List", "Tree", "Stack"], answer: "Tree"}, { question: "Dalam struktur data Tree, node yang tidak memiliki 'anak' disebut...", options: ["Root (Akar)", "Parent (Induk)", "Branch (Cabang)", "Leaf (Daun)"], answer: "Leaf (Daun)"}, { question: "Syarat: \"Membawa kartu pelajar DAN memakai seragam.\" Jika Budi hanya memakai seragam, apa hasilnya?", options: ["Boleh masuk", "Tidak boleh masuk", "Boleh masuk jika diizinkan", "Informasi tidak cukup"], answer: "Tidak boleh masuk"}, { question: "Peta jaringan kereta api paling tepat direpresentasikan dengan struktur data...", options: ["Graf", "Tree", "Array", "Queue"], answer: "Graf"}, { question: "Ciri khas utama dari struktur data Tree adalah...", options: ["Memiliki banyak siklus", "Setiap node bisa punya banyak 'induk'", "Punya simpul awal", "Tidak memiliki siklus (jalur melingkar)"], answer: "Tidak memiliki siklus (jalur melingkar)"}, { question: "Ekspresi: \"(Hari Minggu) AND (Libur sekolah)\". Agar bernilai BENAR, maka...", options: ["Cukup hari Minggu.", "Harus hari Minggu DAN libur sekolah.", "Cukup libur sekolah.", "Salah satu saja cukup."], answer: "Harus hari Minggu DAN libur sekolah."}, { question: "Pertemanan di media sosial paling sesuai direpresentasikan sebagai...", options: ["Tree", "Graf", "Stack", "Array"], answer: "Graf"}, { question: "Sistem login memeriksa: \"(Username benar) AND (Password benar)\". Jika username salah tapi password benar, apa yang terjadi?", options: ["Login berhasil", "Login gagal", "Minta username lagi", "Sistem terkunci"], answer: "Login gagal"}, { question: "Node paling atas dalam sebuah struktur data Tree disebut...", options: ["Leaf (Daun)", "Child (Anak)", "Root (Akar)", "Edge (Sisi)"], answer: "Root (Akar)"} ];
-        let studentName = "", studentClass = ""; let currentQuestionIndex = 0, score = 0;
-        const startBtn = document.getElementById('start-btn'); const loginContainer = document.getElementById('login-container'); const quizArea = document.getElementById('quiz-area');
-        startBtn.addEventListener('click', () => { studentName = document.getElementById('student-name').value.trim(); studentClass = document.getElementById('student-class').value; if (studentName === "" || studentClass === "") { alert("Harap isi nama dan pilih kelas!"); return; } loginContainer.style.display = 'none'; quizArea.style.display = 'block'; startQuiz(); });
-        function startQuiz() { currentQuestionIndex = 0; score = 0; showQuestion(); }
-        function showQuestion() { let currentQuestion = quizData[currentQuestionIndex]; quizArea.innerHTML = ` <div class="quiz-post"> <div class="post-header"> <img src="https://i.pravatar.cc/150?u=guru" alt="avatar"> <span class="username">Guru Informatika</span> </div> <div class="question-text">${currentQuestion.question}</div> <div class="options-container"> ${currentQuestion.options.map(option => `<button class="option">${option}</button>`).join('')} </div> <div class="post-actions"> <i class='bx bx-heart'></i><i class='bx bx-comment'></i><i class='bx bx-paper-plane'></i> </div> <div class="progress-text">Pertanyaan ${currentQuestionIndex + 1} dari ${quizData.length}</div> </div> <button id="next-btn">Selanjutnya</button> `; document.querySelectorAll('.option').forEach(button => { button.addEventListener('click', selectAnswer); }); }
-        function selectAnswer(e) { const selectedBtn = e.target; const isCorrect = selectedBtn.innerText === quizData[currentQuestionIndex].answer; if (isCorrect) { selectedBtn.classList.add('correct'); score++; } else { selectedBtn.classList.add('incorrect'); } document.querySelectorAll('.option').forEach(button => button.disabled = true); const nextBtn = document.getElementById('next-btn'); nextBtn.style.display = 'block'; nextBtn.addEventListener('click', handleNextButton, { once: true }); }
-        function handleNextButton() { currentQuestionIndex++; if (currentQuestionIndex < quizData.length) { showQuestion(); } else { showScore(); } }
-        async function showScore() { const accuracy = Math.round((score / quizData.length) * 100); quizArea.innerHTML = ` <div class="static-page"> <h2>Ujian Selesai, ${studentName}!</h2> <p>Skor akhir kamu adalah:</p> <h1 style="font-size: 4em; margin: 20px 0;">${score * 10}</h1> <p>(${score} dari ${quizData.length} benar, Akurasi: ${accuracy}%)</p> <p id="save-status" style="margin-top: 20px; color: #8e8e8e;">Menyimpan hasil...</p> <button class="login-button" onclick="window.location.reload()">Selesai</button> </div>`; const dataToSend = { nama: studentName, skor: score, kelas: studentClass }; try { await fetch(scriptURL, { method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(dataToSend) }); document.getElementById('save-status').innerText = 'Hasil berhasil disimpan! ✅'; } catch (error) { document.getElementById('save-status').innerText = 'Gagal menyimpan hasil. ❌'; } }
     </script>
 </body>
 </html>
