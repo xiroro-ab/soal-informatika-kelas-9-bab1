@@ -161,19 +161,17 @@
             }
         }
 
-        async function showScore() {
+        async function showScore() 
+        {
             const accuracy = Math.round((score / quizData.length) * 100);
             quizArea.innerHTML = `<div class="static-page"><h2>Ujian Selesai, ${studentName}!</h2><p>Skor akhir kamu adalah:</p><h1 style="font-size: 4em; margin: 20px 0;">${score * 10}</h1><p>(${score} dari ${quizData.length} benar, Akurasi: ${accuracy}%)</p><p id="save-status" style="margin-top: 20px; color: #8e8e8e;">Menyimpan hasil...</p><button class="login-button" onclick="window.location.reload()">Selesai</button></div>`;
             const dataToSend = { nama: studentName, skor: score, kelas: studentClass };
-            try {
-                await fetch(scriptURL, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(dataToSend).toString() }); // Mengirim sebagai form-data
-                document.getElementById('save-status').innerText = 'Hasil berhasil disimpan! ✅';
-            } catch (error) {
-                document.getElementById('save-status').innerText = 'Gagal menyimpan hasil. ❌';
-            }
+    // GANTI DENGAN BLOK YANG BENAR INI:
+            try { await fetch(scriptURL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(dataToSend) });
+            document.getElementById('save-status').innerText = 'Hasil berhasil disimpan! ✅'; } catch (error) { console.error("Error:", error); document.getElementById('save-status').innerText = 'Gagal menyimpan hasil. ❌'; }
         }
-
-        async function loadResults() {
+            async function loadResults() 
+        {
             const resultsContainer = document.getElementById('results-container');
             resultsContainer.innerHTML = '<p>Memuat data hasil ujian...</p>';
             try {
