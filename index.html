@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Informatika</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        :root {
+            --primary-color: #4a90e2; --success-color: #28a745; --danger-color: #dc3545;
+            --light-color: #f0f2f5; --dark-color: #333; --white-color: #fff; --border-color: #ddd;
+            --nav-icon-color: #8A8A8A; --nav-icon-active: #4a90e2;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ccc;
+            color: var(--dark-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        /* === STRUKTUR APLIKASI UTAMA === */
+        .app-container {
+            width: 100%;
+            max-width: 420px; /* Lebar umum ponsel */
+            height: 85vh;
+            max-height: 800px;
+            background: var(--light-color);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 5px solid #333;
+        }
+        .app-header {
+            padding: 15px 20px;
+            background: var(--white-color);
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+        }
+        .app-header h1 { font-size: 1.2em; color: var(--primary-color); }
+        .app-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        /* === KONTEN HALAMAN (PAGE) === */
+        .page { display: none; }
+        .page.active { 
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* === NAVIGASI BAWAH === */
+        .nav-bar {
+            display: flex;
+            justify-content: space-around;
+            background: var(--white-color);
+            border-top: 1px solid #e0e0e0;
+            padding: 10px 0;
+        }
+        .nav-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--nav-icon-color);
+            font-size: 10px;
+            font-family: 'Poppins', sans-serif;
+            transition: color 0.3s;
+        }
+        .nav-button i { font-size: 24px; margin-bottom: 2px; }
+        .nav-button:hover { color: var(--nav-icon-active); }
+        .nav-button.active { color: var(--nav-icon-active); font-weight: 600; }
+
+        /* === STYLE UNTUK KUIS (DARI KODE SEBELUMNYA) === */
+        .name-entry-container, .quiz-container { background: var(--white-color); border-radius: 15px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); }
+        .name-entry-container { padding: 30px; text-align: center; }
+        .quiz-container { overflow: hidden; }
+        .name-entry-container h2 { margin-top: 0; font-size: 1.5em; }
+        .name-entry-container p { margin-bottom: 20px; }
+        #student-name { width: 100%; padding: 12px; font-size: 1em; border: 2px solid var(--border-color); border-radius: 8px; margin-bottom: 15px; }
+        .select-menu { width: 100%; margin-bottom: 20px; cursor: pointer; position: relative; }
+        .select-btn { display: flex; align-items: center; justify-content: space-between; padding: 12px; font-size: 1em; border-radius: 8px; border: 2px solid var(--border-color); }
+        .sBtn-text.selected { color: var(--dark-color); }
+        .options { position: absolute; bottom: 105%; width: 100%; background: var(--white-color); box-shadow: 0 5px 10px rgba(0,0,0,0.1); border-radius: 8px; z-index: 10; list-style: none; max-height: 200px; overflow-y: auto; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .select-menu.active .options { opacity: 1; visibility: visible; }
+        .option-item { display: flex; align-items: center; padding: 12px 15px; transition: background-color 0.2s; }
+        .option-item:hover { background-color: #f2f2f2; }
+        #start-btn { background-color: var(--success-color); color: var(--white-color); padding: 12px 30px; width: 100%; border: none; border-radius: 8px; font-size: 1.1em; cursor: pointer; }
+        .score-container, .about-page, .results-page { padding: 10px; background: var(--white-color); border-radius: 15px; text-align: center; }
+        h2 { margin-bottom: 15px; color: var(--primary-color); }
+        p { line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Kuis Informatika</h1>
+        </header>
+
+        <main class="app-content">
+            <div class="page active" id="page-ujian">
+                <div class="name-entry-container" id="name-entry">
+                    <h2>Selamat Datang!</h2>
+                    <p>Isi data diri Anda untuk memulai ulangan harian.</p>
+                    <input type="text" id="student-name" placeholder="Ketik nama lengkap Anda...">
+                    <div class="select-menu">
+                        <div class="select-btn">
+                            <span class="sBtn-text">-- Pilih Kelas --</span>
+                            <i class='bx bx-chevron-up'></i>
+                        </div>
+                        <ul class="options">
+                            <li class="option-item"><span class="option-text">Kelas 9.1</span></li>
+                            <li class="option-item"><span class="option-text">Kelas 9.2</span></li>
+                            <li class="option-item"><span class="option-text">Kelas 9.3</span></li>
+                            <li class="option-item"><span class="option-text">Kelas 9.4</span></li>
+                        </ul>
+                    </div>
+                    <button id="start-btn">Mulai Ujian</button>
+                </div>
+                <div id="quiz-wrapper" style="display: none;">
+                    </div>
+            </div>
+
+            <div class="page" id="page-tentang">
+                <div class="about-page">
+                    <h2>Tentang Aplikasi</h2>
+                    <p>Aplikasi ini dibuat untuk Ulangan Harian Informatika Bab 1: Berpikir Komputasional.</p>
+                    <p>Materi mencakup Struktur Data Graf dan Tree, serta Ekspresi dan Operator Logika.</p>
+                    <br>
+                    <p><strong>Dibuat oleh:</strong><br>[Nama Guru/Sekolah Anda]</p>
+                </div>
+            </div>
+
+            <div class="page" id="page-hasil">
+                <div class="results-page">
+                    <h2>Hasil Ujian</h2>
+                    <p>Fitur untuk menampilkan rekapitulasi hasil ujian siswa sedang dalam pengembangan.</p>
+                    <p>Untuk saat ini, semua hasil tersimpan dengan aman di database Google Sheets Anda.</p>
+                </div>
+            </div>
+        </main>
+
+        <nav class="nav-bar">
+            <button class="nav-button active" data-page="page-ujian">
+                <i class='bx bxs-home'></i>
+                <span>Ujian</span>
+            </button>
+            <button class="nav-button" data-page="page-tentang">
+                <i class='bx bxs-info-circle'></i>
+                <span>Tentang</span>
+            </button>
+            <button class="nav-button" data-page="page-hasil">
+                <i class='bx bxs-bar-chart-alt-2'></i>
+                <span>Hasil</span>
+            </button>
+        </nav>
+    </div>
+
+    <script>
+        // --- FUNGSI NAVIGASI HALAMAN ---
+        const navButtons = document.querySelectorAll('.nav-button');
+        const pages = document.querySelectorAll('.page');
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetPageId = button.dataset.page;
+                
+                // Sembunyikan semua halaman
+                pages.forEach(page => page.classList.remove('active'));
+                
+                // Tampilkan halaman target
+                document.getElementById(targetPageId).classList.add('active');
+                
+                // Atur status aktif tombol navigasi
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            });
+        });
+
+        // --- SISA KODE KUIS DARI SEBELUMNYA (DENGAN SEDIKIT PENYESUAIAN) ---
+        const quizData = [ /* ... data kuis tidak berubah ... */ 
+            { question: "Dalam struktur data, kumpulan titik-titik (nodes) yang dihubungkan oleh garis-garis (edges) disebut sebagai...", options: ["Tree", "Graf", "Array", "List"], answer: "Graf", rationale: "Ini adalah definisi dasar dari sebuah Graf." }, { question: "Struktur data yang menggambarkan hubungan hierarkis, seperti silsilah keluarga, adalah contoh dari...", options: ["Graf", "Linked List", "Tree", "Stack"], answer: "Tree", rationale: "Tree digunakan untuk data hierarkis." }, { question: "Dalam struktur data Tree, node yang tidak memiliki 'anak' disebut...", options: ["Root (Akar)", "Parent (Induk)", "Branch (Cabang)", "Leaf (Daun)"], answer: "Leaf (Daun)", rationale: "Leaf adalah node di ujung cabang." }, { question: "Syarat: \"Membawa kartu pelajar DAN memakai seragam.\" Jika Budi hanya memakai seragam, apa hasilnya?", options: ["Boleh masuk", "Tidak boleh masuk", "Boleh masuk jika diizinkan", "Informasi tidak cukup"], answer: "Tidak boleh masuk", rationale: "Logika AND mengharuskan semua kondisi benar." }, { question: "Peta jaringan kereta api paling tepat direpresentasikan dengan struktur data...", options: ["Graf", "Tree", "Array", "Queue"], answer: "Graf", rationale: "Graf cocok untuk jaringan non-hierarkis." }, { question: "Ciri khas utama dari struktur data Tree adalah...", options: ["Memiliki banyak siklus", "Setiap node bisa punya banyak 'induk'", "Punya simpul awal", "Tidak memiliki siklus (jalur melingkar)"], answer: "Tidak memiliki siklus (jalur melingkar)", rationale: "Tree adalah graf tanpa siklus." }, { question: "Ekspresi: \"(Hari Minggu) AND (Libur sekolah)\". Agar bernilai BENAR, maka...", options: ["Cukup hari Minggu.", "Harus hari Minggu DAN libur sekolah.", "Cukup libur sekolah.", "Salah satu saja cukup."], answer: "Harus hari Minggu DAN libur sekolah.", rationale: "Logika AND mengharuskan kedua kondisi terpenuhi." }, { question: "Pertemanan di media sosial paling sesuai direpresentasikan sebagai...", options: ["Tree", "Graf", "Stack", "Array"], answer: "Graf", rationale: "Jaringan sosial adalah contoh klasik dari Graf." }, { question: "Sistem login memeriksa: \"(Username benar) AND (Password benar)\". Jika username salah tapi password benar, apa yang terjadi?", options: ["Login berhasil", "Login gagal", "Minta username lagi", "Sistem terkunci"], answer: "Login gagal", rationale: "Satu kondisi salah membuat hasil AND menjadi salah." }, { question: "Node paling atas dalam sebuah struktur data Tree disebut...", options: ["Leaf (Daun)", "Child (Anak)", "Root (Akar)", "Edge (Sisi)"], answer: "Root (Akar)", rationale: "Root adalah titik awal atau puncak dari Tree." }
+        ];
+        let studentName = "", studentClass = "";
+        const selectMenu = document.querySelector(".select-menu");
+        const selectBtn = selectMenu.querySelector(".select-btn");
+        const options = selectMenu.querySelectorAll(".option-item");
+        const sBtn_text = selectMenu.querySelector(".sBtn-text");
+        const studentNameInput = document.getElementById('student-name');
+        const startBtn = document.getElementById('start-btn');
+        const nameEntryContainer = document.getElementById('name-entry');
+        const quizWrapper = document.getElementById('quiz-wrapper');
+        
+        selectBtn.addEventListener("click", () => selectMenu.classList.toggle("active"));
+        options.forEach(option => {
+            option.addEventListener("click", () => {
+                let selectedOption = option.querySelector(".option-text").innerText;
+                sBtn_text.innerText = selectedOption;
+                sBtn_text.classList.add("selected");
+                studentClass = selectedOption; 
+                selectMenu.classList.remove("active");
+            });
+        });
+
+        startBtn.addEventListener('click', () => {
+            studentName = studentNameInput.value.trim();
+            if (studentName === "" || studentClass === "") {
+                alert("Harap isi nama dan pilih kelas Anda!");
+                return;
+            }
+            // Sembunyikan form nama, tampilkan wrapper kuis
+            nameEntryContainer.style.display = 'none';
+            
+            // Masukkan HTML kuis ke dalam wrapper
+            const quizHtml = `
+            <div class="quiz-container">
+                <div class="header">
+                    <div><h1 id="display-name">${studentName} (${studentClass})</h1></div>
+                    <div id="progress">Soal 1/10</div>
+                </div>
+                <div class="main-content" id="quiz-area">
+                    <p id="question-text"></p>
+                    <div class="options-container"></div>
+                    <div id="feedback"></div>
+                </div>
+                <div class="footer"><button id="next-btn">Berikutnya</button></div>
+            </div>`;
+            quizWrapper.innerHTML = quizHtml;
+            quizWrapper.style.display = 'block';
+            
+            startQuiz(); // Mulai logika kuis
+        });
+
+        // Semua fungsi kuis (startQuiz, showQuestion, showScore, dll) sekarang berada di sini
+        let currentQuestionIndex = 0, score = 0;
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            resetState();
+            let currentQuestion = quizData[currentQuestionIndex];
+            document.getElementById('progress').innerText = `Soal ${currentQuestionIndex + 1}/${quizData.length}`;
+            document.getElementById('question-text').innerText = currentQuestion.question;
+            const optionsContainer = document.querySelector('.options-container');
+            currentQuestion.options.forEach(optionText => {
+                const button = document.createElement('button');
+                button.innerText = optionText;
+                button.classList.add('option');
+                button.addEventListener('click', selectAnswer);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function resetState() {
+            const nextBtn = document.getElementById('next-btn');
+            if(nextBtn) nextBtn.style.visibility = 'hidden';
+            
+            const feedbackText = document.getElementById('feedback');
+            if(feedbackText) feedbackText.style.display = 'none';
+
+            const optionsContainer = document.querySelector('.options-container');
+            if(optionsContainer) optionsContainer.innerHTML = '';
+        }
+        
+        function selectAnswer(e) {
+            const selectedBtn = e.target;
+            const isCorrect = selectedBtn.innerText === quizData[currentQuestionIndex].answer;
+            if (isCorrect) {
+                selectedBtn.classList.add('correct');
+                score++;
+            } else {
+                selectedBtn.classList.add('incorrect');
+            }
+            document.querySelectorAll('.option').forEach(button => button.disabled = true);
+            document.getElementById('next-btn').style.visibility = 'visible';
+        }
+
+        async function showScore() {
+            const accuracy = Math.round((score / quizData.length) * 100);
+            quizWrapper.innerHTML = `
+            <div class="score-container">
+                <h2>Ulangan Selesai, ${studentName}!</h2>
+                <p>Skor Anda: <strong>${score}</strong> dari <strong>${quizData.length}</strong> soal.</p>
+                <p>Akurasi Jawaban: <strong>${accuracy}%</strong></p>
+                <p id="save-status">Menyimpan hasil...</p>
+                <button id="restart-btn" onclick="window.location.reload()">Selesai</button>
+            </div>`;
+
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyBEfA0yCWP0r9ZExlIsVcYI8OMqq0iznDbHT3GJ5mcX_XIiJbJQfURWNXD-uaAZwaglA/exec';
+            const dataToSend = { nama: studentName, skor: score, kelas: studentClass };
+            try {
+                await fetch(scriptURL, { method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(dataToSend) });
+                document.getElementById('save-status').innerText = 'Hasil berhasil disimpan! ✅';
+            } catch (error) {
+                document.getElementById('save-status').innerText = 'Gagal menyimpan hasil. ❌';
+            }
+        }
+
+        function handleNextButton() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                showQuestion();
+            } else {
+                showScore();
+            }
+        }
+        // Menambahkan event listener setelah elemen dibuat
+        quizWrapper.addEventListener('click', function(event) {
+            if (event.target && event.target.id === 'next-btn') {
+                handleNextButton();
+            }
+        });
+    </script>
+</body>
+</html>
